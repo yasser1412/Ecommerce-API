@@ -9,9 +9,9 @@ const user = new UsersModel();
 export const index = async (_req: Request, res: Response) => {
   try {
     const allUsers = await user.index();
-    res.status(200).json(allUsers);
+    res.status(200).send(allUsers);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).send(error);
   }
 };
 
@@ -19,9 +19,9 @@ export const show = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
     const showUser = await user.show(parseInt(id));
-    res.status(200).json(showUser);
+    res.status(200).send(showUser);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).send(error);
   }
 };
 
@@ -38,18 +38,18 @@ export const create = async (req: Request, res: Response) => {
       { newUser: createUser },
       process.env.JWTSECRET as string
     );
-    res.status(200).json(token);
+    res.status(200).send(token);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).send(error);
   }
 };
 
 export const del = async (req: Request, res: Response) => {
   try {
     const deletedUser = await user.destroy(parseInt(req.params.id));
-    res.status(200).json(deletedUser);
+    res.status(200).send(deletedUser);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).send(error);
   }
 };
 
@@ -59,8 +59,8 @@ export const authenticate = async (req: Request, res: Response) => {
       req.body.username,
       req.body.password
     );
-    res.status(200).json(authenticUser);
+    res.status(200).send(authenticUser);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).send(error);
   }
 };
