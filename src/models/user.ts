@@ -2,8 +2,8 @@ import client from '../database';
 import { hash, compareHash } from '../utils/bcrypt';
 export interface User {
   id?: number;
-  first_name: string;
-  last_name: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
 }
@@ -40,12 +40,12 @@ export class UsersModel {
   async create(user: User): Promise<User | Error> {
     try {
       const sql =
-        'INSERT INTO users(first_name , last_name , email , password) VALUES($1 , $2 , $3 , $4) RETURNING *';
+        'INSERT INTO users(firstname , lastname , email , password) VALUES($1 , $2 , $3 , $4) RETURNING *';
       const con = await client.connect();
       const hashed = hash(user.password);
       const res = await con.query(sql, [
-        user.first_name,
-        user.last_name,
+        user.firstname,
+        user.lastname,
         user.email,
         hashed,
       ]);
