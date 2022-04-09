@@ -3,9 +3,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { DB_HOST, DB_NAME, TEST_DB_NAME, DB_USER, DB_PASSWORD, ENV } = process.env;
+const { DB_HOST, DB_NAME, TEST_DB_NAME, DB_USER, DB_PASSWORD, ENV } =
+  process.env;
 
-let client: Pool | undefined = undefined;
+let client: Pool;
 
 if (ENV == 'dev') {
   client = new Pool({
