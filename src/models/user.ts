@@ -1,4 +1,4 @@
-import client from '../database';
+import client from '../startup/database';
 import { hash, compareHash } from '../utils/bcrypt';
 export interface User {
   id?: number;
