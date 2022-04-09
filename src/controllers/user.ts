@@ -17,7 +17,8 @@ export const index = async (_req: Request, res: Response) => {
 
 export const show = async (req: Request, res: Response) => {
   try {
-    const showUser = await user.show(parseInt(req.params.id));
+    const id = req.params.id;
+    const showUser = await user.show(parseInt(id));
     res.status(200).json(showUser);
   } catch (error) {
     res.status(400).json(error);
