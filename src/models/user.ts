@@ -8,7 +8,6 @@ export interface User {
   password: string;
 }
 export class UsersModel {
-
   async index(): Promise<User[] | Error> {
     try {
       const sql = 'SELECT * FROM users';
@@ -22,7 +21,6 @@ export class UsersModel {
     }
   }
 
-
   async show(id: number): Promise<User | Error> {
     try {
       const sql = 'SELECT * FROM users WHERE id = $1';
@@ -35,7 +33,6 @@ export class UsersModel {
       return new Error(`something went wrong ${error}`);
     }
   }
-
 
   async create(user: User): Promise<User | Error> {
     try {
@@ -56,7 +53,6 @@ export class UsersModel {
       return new Error(`something went wrong ${error}`);
     }
   }
-
 
   async destroy(id: number): Promise<User | Error> {
     try {
