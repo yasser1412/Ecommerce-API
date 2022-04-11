@@ -5,11 +5,14 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-describe('store api products', () => {
+describe('api/products', () => {
   let token: string;
   beforeAll(() => {
     const secret = process.env.JWT_SECRET as string;
-    token = jwt.sign({ firstname: 'test', lastname: 'test', email: 'mail@email.com' }, secret);
+    token = jwt.sign(
+      { firstname: 'test', lastname: 'test', email: 'mail@email.com' },
+      secret
+    );
   });
   it('should return 200 status code on add product at autharized login', async () => {
     const res = await request
@@ -70,11 +73,15 @@ describe('store api products', () => {
   });
 
   it('should return 200 status code on delete product at autharized login', async () => {
-    const res = await request.delete('/api/products/2').set('x-auth-token', token);
+    const res = await request
+      .delete('/api/products/2')
+      .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
   });
   it('should return 401 status code on delete product at unautharized login', async () => {
-    const res = await request.delete('/api/products/2').set('x-auth-toke', token);
+    const res = await request
+      .delete('/api/products/2')
+      .set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
   });
 });

@@ -37,7 +37,7 @@ export class UsersModel {
   async create(user: User): Promise<User | Error> {
     try {
       const sql =
-      'INSERT INTO users(firstname , lastname , email , password) VALUES($1 , $2 , $3 , $4) RETURNING *';
+        'INSERT INTO users(firstname , lastname , email , password) VALUES($1 , $2 , $3 , $4) RETURNING *';
       const con = await client.connect();
       const hashed = hash(user.password);
       const res = await con.query(sql, [

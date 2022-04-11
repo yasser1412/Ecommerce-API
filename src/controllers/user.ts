@@ -47,7 +47,7 @@ export const create = async (
     password: req.body.password,
   };
   try {
-    const createUser = (await user.create(newUser));
+    const createUser = await user.create(newUser);
     const token = generateAuthToken(createUser as User);
     return res.status(200).send(token);
   } catch (error) {
