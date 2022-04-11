@@ -15,3 +15,5 @@ routes(app);
 app.listen(PORT, function () {
   console.log(`server started at http://localhost:${PORT}`);
 });
+
+export default app;

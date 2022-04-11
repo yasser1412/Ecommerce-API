@@ -2,13 +2,14 @@ import { User, UsersModel } from '../models/user';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { isNull } from 'util';
 dotenv.config();
 
 const user = new UsersModel();
 
 const generateAuthToken = function (user: User): string {
   return jwt.sign(
-    { _id: user.id, email: user.email },
+    { firstname: user.firstname, lastname: user.lastname, email: user.email },
     process.env.JWT_SECRET as string
   );
 };
@@ -47,11 +48,8 @@ export const create = async (
   };
   try {
     const createUser = (await user.create(newUser));
-    if(!(createUser instanceof Error)){
-      const token = generateAuthToken(createUser);
-      return res.status(200).send(token);
-    }
-    return res.status(400).send("User already exists");
+    const token = generateAuthToken(createUser as User);
+    return res.status(200).send(token);
   } catch (error) {
     return res.status(400).send(error);
   }
