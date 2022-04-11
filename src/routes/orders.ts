@@ -1,4 +1,10 @@
-import { completeOrder, create, indexOrdersByUser, del, indexCompletedOrders } from '../controllers/order';
+import {
+  completeOrder,
+  create,
+  indexOrdersByUser,
+  del,
+  indexCompletedOrders,
+} from '../controllers/order';
 import { Router } from 'express';
 import { verifyUser } from '../middlewares/auth';
 

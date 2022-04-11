@@ -36,9 +36,13 @@ export class UsersModel {
 
   async create(user: User): Promise<User | Error> {
     try {
+      const con = await client.connect();
+      const existUser = await con.query('SELECT * FROM users WHERE email = $1', [user.email]);
+      if(existUser){
+        return new Error(`User is already exists`);
+      }
       const sql =
         'INSERT INTO users(firstname , lastname , email , password) VALUES($1 , $2 , $3 , $4) RETURNING *';
-      const con = await client.connect();
       const hashed = hash(user.password);
       const res = await con.query(sql, [
         user.firstname,

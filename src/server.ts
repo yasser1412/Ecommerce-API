@@ -12,6 +12,6 @@ app.get('/', function (_req: Request, res: Response) {
 });
 routes(app);
 
-app.listen(3000, function () {
-  console.log(`starting app on: ${PORT}`);
+app.listen(PORT, function () {
+  console.log(`server started at http://localhost:${PORT}`);
 });
