@@ -8,7 +8,7 @@
 
 [End Points](#EndPoints)
 ## Description
-    A node-express-typescript application providing restful api endpoints to manage users, products and user orders for an Ecommerce application.
+A node-express-typescript application providing restful api endpoints to manage users, products and user orders for an Ecommerce application.
 
  ## How To Use
 
