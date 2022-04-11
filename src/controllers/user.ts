@@ -2,7 +2,6 @@ import { User, UsersModel } from '../models/user';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { isNull } from 'util';
 dotenv.config();
 
 const user = new UsersModel();
