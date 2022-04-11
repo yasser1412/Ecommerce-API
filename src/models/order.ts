@@ -25,6 +25,18 @@ export class OrdersModel {
       return new Error(`something went wrong ${err}`);
     }
   }
+  async index(): Promise<Order[] | Error> {
+    try {
+      const sql = 'SELECT * FROM orders';
+      const con = await client.connect();
+      const res = await con.query(sql);
+      const data = res.rows;
+      con.release();
+      return data;
+    } catch (error) {
+      return new Error(`something went wrong ${error}`);
+    }
+  }
   async indexOrdersByUser(user_id: number): Promise<Order[] | Error> {
     try {
       const sql = 'SELECT * FROM orders WHERE user_id = $1';
