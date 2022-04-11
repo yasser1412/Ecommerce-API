@@ -6,26 +6,39 @@ dotenv.config();
 
 const user = new UsersModel();
 
-export const index = async (_req: Request, res: Response) => {
+const generateAuthToken = function (user: User): string {
+  return jwt.sign(
+    { _id: user.id, email: user.email },
+    process.env.JWT_SECRET as string
+  );
+};
+
+export const index = async (
+  _req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const allUsers = await user.index();
-    res.status(200).send(allUsers);
+    return res.status(200).send(allUsers);
   } catch (error) {
-    res.status(400).send(error);
+    return res.status(400).send(error);
   }
 };
 
-export const show = async (req: Request, res: Response) => {
+export const show = async (req: Request, res: Response): Promise<Response> => {
   try {
     const id = req.params.id;
     const showUser = await user.show(parseInt(id));
-    res.status(200).send(showUser);
+    return res.status(200).send(showUser);
   } catch (error) {
-    res.status(400).send(error);
+    return res.status(400).send(error);
   }
 };
 
-export const create = async (req: Request, res: Response) => {
+export const create = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const newUser: User = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -33,34 +46,38 @@ export const create = async (req: Request, res: Response) => {
     password: req.body.password,
   };
   try {
-    const createUser = await user.create(newUser);
-    const token = jwt.sign(
-      { newUser: createUser },
-      process.env.JWTSECRET as string
-    );
-    res.status(200).send(token);
+    const createUser = (await user.create(newUser));
+    if(!(createUser instanceof Error)){
+      const token = generateAuthToken(createUser);
+      return res.status(200).send(token);
+    }
+    return res.status(400).send("User already exists");
   } catch (error) {
-    res.status(400).send(error);
+    return res.status(400).send(error);
   }
 };
 
-export const del = async (req: Request, res: Response) => {
+export const del = async (req: Request, res: Response): Promise<Response> => {
   try {
     const deletedUser = await user.destroy(parseInt(req.params.id));
-    res.status(200).send(deletedUser);
+    return res.status(200).send(deletedUser);
   } catch (error) {
-    res.status(400).send(error);
+    return res.status(400).send(error);
   }
 };
 
-export const authenticate = async (req: Request, res: Response) => {
+export const authenticate = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
-    const authenticUser = await user.authenticate(
-      req.body.username,
+    const authenticUser = (await user.authenticate(
+      req.body.email,
       req.body.password
-    );
-    res.status(200).send(authenticUser);
+    )) as User;
+    const token = generateAuthToken(authenticUser);
+    return res.header('x-auth-token', token).status(200).send(token);
   } catch (error) {
-    res.status(400).send(error);
+    return res.status(400).send(error);
   }
 };
