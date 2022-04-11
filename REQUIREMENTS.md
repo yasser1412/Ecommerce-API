@@ -4,39 +4,55 @@ The company stakeholders want to create an online storefront to showcase their g
 These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application. 
 
 ## API Endpoints
-#### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+### Products
 
-#### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+| HTTP verbs | paths | Used for |
+| ---------- | ----- | -------- |
+| GET | /api/products | Index |
+| GET | /api/products/:id | Show |
+| POST | /api/prodcts | Create [token required] |
+| PUT | /api/products | Update [token required] |
+| DELETE | /api/products/:id | Delete [token required] |
+### Users
 
-#### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+| HTTP verbs | paths | Used for |
+| ---------- | ----- | -------- |
+| GET | /api/users | Index [token required] |
+| GET | /api/users/:id | Show [token required] |
+| POST | /api/users | Create |
+| DELETE | /api/users/:id | Delete [token required] |
+### Orders
+
+| HTTP verbs | paths | Used for |
+| ---------- | ----- | -------- |
+| GET | /api/orders | Index [token required]|
+| GET | /api/orders/:id | Show [token required]|
+| GET | /api/orders/orderbyuser/:id | Current Order by user (args: user id)[token required] |
+| GET | /api/orders/completedorders/:id | completed Orders by user (args: user id)[token required] |
+| POST | /api/orders | Create [token required] |
+| PUT | /api/orders/completeorder/:id | Update order to complete [token required] |
+| DELETE | /api/orders/:id | Delete [token required] |
+
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+-  id | integar
+- name | VARCHAR(255)
+- price | integar 
+- category | VARCHAR(255)
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- id | integar
+- firstName | VARCHAR(50)
+- lastName | VARCHAR(50)
+- email | VARCHAR(255) UNIQUE
+- password | VARCHAR
+- created_at | TIMESTAMPTZ 
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id | integar
+- id of each product in the order | integar
+- quantity of each product in the order | integar
+- user_id | integar
+- status of order (active or complete) | VARCHAR(50)
 
