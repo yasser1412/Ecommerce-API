@@ -4,11 +4,24 @@
 
 [Instructions](#How-To-Use)
 
+[Database Setup](#Database-Setup)
+
 [Scripts](#Scripts)
 
 [End Points](#EndPoints)
 ## Description
 A node-express-typescript application providing restful api endpoints to manage users, products and user orders for an Ecommerce application.
+
+## Database Setup
+
+The server application is configured to run with a Postgresql database running with the following settings:
+
+- Host: localhost
+- Port: 5432
+- Database user: "postgres"
+- Database name: "store_dev"
+- Test database name: "store_test"
+- Create the database for devolpment and testing
 
  ## How To Use
 
