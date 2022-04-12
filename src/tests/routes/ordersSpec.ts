@@ -25,7 +25,7 @@ describe('/api/orders', () => {
     createUser();
   });
 
-  it('should return 200 status code on add order at autharized login', async () => {
+  it('should return 200 status code on add order at autharized login', async (done) => {
     const res = await request
       .post('/api/orders')
       .send({
@@ -34,8 +34,9 @@ describe('/api/orders', () => {
       })
       .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on add order at unautharized login', async () => {
+  it('should return 401 status code on add order at unautharized login', async (done) => {
     const res = await request
       .post('/api/orders')
       .send({
@@ -44,72 +45,85 @@ describe('/api/orders', () => {
       })
       .set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 status code on orders by user at autharized login', async () => {
+  it('should return 200 status code on orders by user at autharized login', async (done) => {
     const res = await request
       .get('/api/orders/orderbyuser/1')
       .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on orders by user at unautharized login', async () => {
+  it('should return 401 status code on orders by user at unautharized login', async (done) => {
     const res = await request
       .get('/api/orders/orderbyuser/1')
       .set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
-  it('should return 200 status code on show at autharized login', async () => {
+  it('should return 200 status code on show at autharized login', async (done) => {
     const res = await request.get('/api/orders/1').set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on show at unautharized login', async () => {
+  it('should return 401 status code on show at unautharized login', async (done) => {
     const res = await request.get('/api/orders/1').set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 status code on completed orders at autharized login', async () => {
+  it('should return 200 status code on completed orders at autharized login', async (done) => {
     const res = await request
       .get('/api/orders/completedorders/1')
       .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on completed orders at unautharized login', async () => {
+  it('should return 401 status code on completed orders at unautharized login', async (done) => {
     const res = await request
       .get('/api/orders/completedorders/1')
       .set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 status code on complete at autharized login', async () => {
+  it('should return 200 status code on complete at autharized login', async (done) => {
     const res = await request
       .put('/api/orders/completeorder/1')
       .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on complete at unautharized login', async () => {
+  it('should return 401 status code on complete at unautharized login', async (done) => {
     const res = await request
       .put('/api/orders/completeorder/1')
       .set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 status code on delete order at autharized login', async () => {
+  it('should return 200 status code on delete order at autharized login', async (done) => {
     const res = await request
       .delete('/api/orders/1')
       .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on delete order at autharized login', async () => {
+  it('should return 401 status code on delete order at autharized login', async (done) => {
     const res = await request.delete('/api/orders/1').set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 code status on GET all orders at autharized login', async () => {
+  it('should return 200 code status on GET all orders at autharized login', async (done) => {
     const res = await request.get('/api/orders').set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 code status on GET all orders at unautharized login', async () => {
+  it('should return 401 code status on GET all orders at unautharized login', async (done) => {
     const res = await request.get('/api/orders').set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 });

@@ -14,7 +14,7 @@ describe('api/products', () => {
       secret
     );
   });
-  it('should return 200 status code on add product at autharized login', async () => {
+  it('should return 200 status code on add product at autharized login', async (done) => {
     const res = await request
       .post('/api/products')
       .send({
@@ -24,8 +24,9 @@ describe('api/products', () => {
       })
       .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on add product at unautharized login', async () => {
+  it('should return 401 status code on add product at unautharized login', async (done) => {
     const res = await request
       .post('/api/products')
       .send({
@@ -35,19 +36,22 @@ describe('api/products', () => {
       })
       .set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 status code on index', async () => {
+  it('should return 200 status code on index', async (done) => {
     const res = await request.get('/api/products');
     expect(res.statusCode).toBe(200);
+    done();
   });
 
-  it('should return 200 on show product', async () => {
+  it('should return 200 on show product', async (done) => {
     const res = await request.get('/api/products/2');
     expect(res.statusCode).toBe(200);
+    done();
   });
 
-  it('should return 200 status code on update product at autharized login', async () => {
+  it('should return 200 status code on update product at autharized login', async (done) => {
     const res = await request
       .put('/api/products')
       .send({
@@ -58,8 +62,9 @@ describe('api/products', () => {
       })
       .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on update product at unautharized login', async () => {
+  it('should return 401 status code on update product at unautharized login', async (done) => {
     const res = await request
       .put('/api/products')
       .send({
@@ -70,18 +75,21 @@ describe('api/products', () => {
       })
       .set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 status code on delete product at autharized login', async () => {
+  it('should return 200 status code on delete product at autharized login', async (done) => {
     const res = await request
       .delete('/api/products/2')
       .set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on delete product at unautharized login', async () => {
+  it('should return 401 status code on delete product at unautharized login', async (done) => {
     const res = await request
       .delete('/api/products/2')
       .set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 });

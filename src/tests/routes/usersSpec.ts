@@ -15,40 +15,47 @@ describe('api/users', () => {
     );
   });
 
-  it('should return 200 status code on creating a new user', async () => {
+  it('should return 200 status code on creating a new user', async (done) => {
     const res = await request.post('/api/users').send({
-      firstname: 'tesssst',
-      lastname: 'tesssst',
+      firstname: 'test',
+      lastname: 'test',
       email: 'mail@email.com',
       password: 'password',
     });
     expect(res.statusCode).toBe(200);
+    done();
   });
 
-  it('should return 200 status code on showing all users info at autharized login', async () => {
+  it('should return 200 status code on showing all users info at autharized login', async (done) => {
     const res = await request.get('/api/users').set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on showing all users info at unautharized login', async () => {
+  it('should return 401 status code on showing all users info at unautharized login', async (done) => {
     const res = await request.get('/api/users').set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 status code on show user at autharized login', async () => {
+  it('should return 200 status code on show user at autharized login', async (done) => {
     const res = await request.get('/api/users/2').set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on show user at unautharized login', async () => {
+  it('should return 401 status code on show user at unautharized login', async (done) => {
     const res = await request.get('/api/users/2').set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 
-  it('should return 200 status code on delete user at autharized login', async () => {
+  it('should return 200 status code on delete user at autharized login', async (done) => {
     const res = await request.delete('/api/users/2').set('x-auth-token', token);
     expect(res.statusCode).toBe(200);
+    done();
   });
-  it('should return 401 status code on delete user at unautharized login', async () => {
+  it('should return 401 status code on delete user at unautharized login', async (done) => {
     const res = await request.delete('/api/users/2').set('x-auth-toke', token);
     expect(res.statusCode).toBe(401);
+    done();
   });
 });
