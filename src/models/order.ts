@@ -43,6 +43,7 @@ export class OrdersModel {
       const sql = 'SELECT * FROM orders WHERE id = $1';
       const con = await client.connect();
       const res = await con.query(sql, [id]);
+      con.release();
       return res.rows[0];
     } catch (error) {
       return new Error(`something went wrong ${error}`);
