@@ -11,6 +11,7 @@ export class ProductsModel {
       const sql = 'SELECT * FROM products';
       const con = await client.connect();
       const res = await con.query(sql);
+      con.release();
       return res.rows;
     } catch (error) {
       return new Error(`something went wrong ${error}`);
@@ -22,6 +23,7 @@ export class ProductsModel {
       const sql = 'SELECT * FROM products WHERE id = $1';
       const con = await client.connect();
       const res = await con.query(sql, [id]);
+      con.release();
       return res.rows[0];
     } catch (error) {
       return new Error(`something went wrong ${error}`);
@@ -38,6 +40,7 @@ export class ProductsModel {
         product.price,
         product.category,
       ]);
+      con.release();
       return res.rows[0];
     } catch (error) {
       return new Error(`something went wrong ${error}`);
@@ -55,6 +58,7 @@ export class ProductsModel {
         product.category,
         product.id,
       ]);
+      con.release();
       return res.rows[0];
     } catch (error) {
       return new Error(`something went wrong ${error}`);
@@ -66,6 +70,7 @@ export class ProductsModel {
       const sql = 'DELETE FROM products WHERE id = $1 RETURNING *';
       const con = await client.connect();
       const res = await con.query(sql, [id]);
+      con.release();
       return res.rows[0];
     } catch (error) {
       return new Error(`something went wrong ${error}`);
