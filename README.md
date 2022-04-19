@@ -9,7 +9,9 @@
 [Scripts](#Scripts)
 
 [End Points](#EndPoints)
+
 ## Description
+
 A node-express-typescript application providing restful api endpoints to manage users, products and user orders for an Ecommerce application.
 
 ## Database Setup
@@ -23,12 +25,13 @@ The server application is configured to run with a Postgresql database running w
 - Test database name: "store_test"
 - Create the database for devolpment and testing
 
- ## How To Use
+## How To Use
 
- - clone the repository
+- clone the repository
 - run `npm install`
 - create .env file at the root directory that contains the following:
-  ```
+
+  ```text
   DB_HOST={your postgresql database host}
   DB_NAME={your postgresql database name}
   TEST_DB_NAME={your postgresql test database name}
@@ -38,6 +41,7 @@ The server application is configured to run with a Postgresql database running w
   ENV=dev
   BCRYPT_PASSWORD={your bcrypt password}
   SALT_ROUNDS=10
+
   ```
 
 - install db-migrate globally by running `npm install -g db-migrate`
@@ -45,13 +49,14 @@ The server application is configured to run with a Postgresql database running w
 - run `npm run watch`
 
 ## Scripts
-- To Run The Server: 
+
+- To Run The Server:
 `npm run start`
-- To Run Tests: 
+- To Run Tests:
 `npm run test`
-- To Run prettier: 
+- To Run prettier:
 `npm run prettier`
-- To Run EsLint: 
+- To Run EsLint:
 `npm run lint`
 
 ## EndPoints
@@ -69,8 +74,8 @@ The server application is configured to run with a Postgresql database running w
 | DELETE | /api/users/:id | Delete [token required] |
 | GET | /api/orders | Index [token required]|
 | GET | /api/orders/:id | Show [token required]|
-| GET | /api/orders/orderbyuser/:id | Current Order by user (args: user id)[token required] |
-| GET | /api/orders/completedorders/:id | Completed Orders by user (args: user id)[token required] |
+| GET | /api/orders/orderbyuser/:id | Current Order by user [args: user id](token required) |
+| GET | /api/orders/completedorders/:id | Completed Orders by user [args: user id](token required) |
 | POST | /api/orders | Create [token required] |
 | PUT | /api/orders/completeorder/:id | Update order to complete [token required] |
 | DELETE | /api/orders/:id | Delete [token required] |
