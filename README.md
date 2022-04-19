@@ -39,27 +39,6 @@ The server application is configured to run with a Postgresql database running w
   BCRYPT_PASSWORD={your bcrypt password}
   SALT_ROUNDS=10
   ```
-- create a database.json file at the root directory that contains the following:
-
-  ```
-  {
-    "dev": {
-      "driver": "pg",
-      "host": "{your postgresql database host}",
-      "database": "{your postgresql database name}",
-      "user": "{your postgresql database user}",
-      "password": "{your postgresql database password}",
-    },
-    "test": {
-      "driver": "pg",
-      "host": "{your postgresql database host}",
-      "database": "{your test postgresql database name}",
-      "user": "{your postgresql database user}",
-      "password": "{your postgresql database password}",
-    },
-  }
-
-  ```
 
 - install db-migrate globally by running `npm install -g db-migrate`
 - run `db-migrate up` to create the database tables
